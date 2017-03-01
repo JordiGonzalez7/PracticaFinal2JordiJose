@@ -12,15 +12,20 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.File;
 
 public class Camara extends AppCompatActivity {
 
     private Button btn1c, btn2c, btn3c;
-    private ImageView img1;
-    private int tipo;
+    private ImageView img1c, img2c;
+    public int tipo;
     private Bitmap bMap;
+    private File fotodir;
+
+    private final static int normal = 1;
+    private final static int reducida = 2;
 
 
     private Uri idIMG;
@@ -34,7 +39,11 @@ public class Camara extends AppCompatActivity {
         btn1c = (Button) findViewById(R.id.btn1);
         btn2c = (Button) findViewById(R.id.btn2);
         btn3c = (Button) findViewById(R.id.btn3);
-        img1 = (ImageView) findViewById(R.id.img1);
+        img1c = (ImageView) findViewById(R.id.img1);
+        img2c = (ImageView) findViewById(R.id.img2);
+
+        fotodir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "FotosPrueba");
+        fotodir.mkdirs();
 
 
         btn1c.setOnClickListener(new View.OnClickListener() {
@@ -42,8 +51,6 @@ public class Camara extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE_SECURE);
 
-                File fotodir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "FotosPrueba");
-                fotodir.mkdirs();
 
                 File foto = new File(fotodir, "foto1.jpg");
                 Uri uriSavedImage = Uri.fromFile(foto);
@@ -51,8 +58,8 @@ public class Camara extends AppCompatActivity {
                 i.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
 
                 idIMG = Uri.fromFile(foto);
-                tipo = 1;
-                startActivityForResult(i, tipo);
+
+                startActivityForResult(i, normal);
             }
         });
 
@@ -63,17 +70,15 @@ public class Camara extends AppCompatActivity {
 
                 Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE_SECURE);
 
-                File fotodir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "FotosPrueba");
-                fotodir.mkdirs();
 
-                File foto = new File(fotodir, "foto1.jpg");
+                File foto = new File(fotodir, "foto2.jpg");
                 Uri uriSavedImage = Uri.fromFile(foto);
 
                 i.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
 
                 idIMG = Uri.fromFile(foto);
-                tipo = 2;
-                startActivityForResult(i, tipo);
+
+                startActivityForResult(i, reducida);
 
             }
         });
@@ -98,28 +103,50 @@ public class Camara extends AppCompatActivity {
         Log.e("RESULT_OK", "RESULT_OK:" + RESULT_OK);
 
 
-        if (requestCode == 1 && resultCode == RESULT_OK) {
+        if ((requestCode == normal || requestCode == reducida) && resultCode == RESULT_OK) {
 
-            switch (tipo) {
+            switch (requestCode) {
 
-                case 1:
-                    bMap = BitmapFactory.decodeFile(
-                            getExternalFilesDir(Environment.DIRECTORY_PICTURES) +
-                                    "/FotosPrueba/" + "foto1.jpg");
+                case normal:
+                    try {
 
-                    img1.setImageBitmap(bMap);
+                        bMap = BitmapFactory.decodeFile(
+                                getExternalFilesDir(Environment.DIRECTORY_PICTURES) +
+                                        "/FotosPrueba/" + "foto1.jpg");
+
+
+                        img1c.setImageBitmap(bMap);
+                    } catch (Exception e) {
+
+                        Toast.makeText(getApplicationContext(), "Ha habido un erro al cargar la imagen", Toast.LENGTH_LONG).show();
+
+                    }
+
+
                     break;
-                case 2:
-                    bMap = BitmapFactory.decodeFile(
-                            getExternalFilesDir(Environment.DIRECTORY_PICTURES) +
-                                    "/FotosPrueba/" + "foto1.jpg");
+                case reducida:
+                    try {
 
-                    img1.setImageBitmap(bMap);
-                    img1.getLayoutParams().height = 77;
-                    img1.getLayoutParams().width = 55;
+                        bMap = BitmapFactory.decodeFile(
+                                getExternalFilesDir(Environment.DIRECTORY_PICTURES) +
+                                        "/FotosPrueba/" + "foto2.jpg");
+                        int alt = (int) (bMap.getHeight() * 1080 / bMap.getWidth());
+                        Bitmap reduit = Bitmap.createScaledBitmap(bMap, 1080, alt, true);
+                        img2c.setImageBitmap(reduit);
+
+                    } catch (Exception e) {
+
+                        Toast.makeText(getApplicationContext(), "Ha habido un erro al cargar la imagen", Toast.LENGTH_LONG).show();
+
+                    }
+
                     break;
 
             }
+        } else {
+
+            Toast.makeText(getApplicationContext(), "Operacion cancelada", Toast.LENGTH_LONG).show();
+
         }
 
     }
