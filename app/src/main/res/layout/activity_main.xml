@@ -59,4 +59,13 @@
         android:contentDescription=""
         tools:ignore="ContentDescription" />
 
+    <Button
+        android:text="Button"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/btncamera"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp"
+        android:id="@+id/btnso"
+        android:layout_height="90dp" />
+
 </RelativeLayout>
