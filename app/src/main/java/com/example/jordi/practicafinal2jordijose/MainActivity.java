@@ -9,18 +9,21 @@ import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ImageButton btnCamera;
-    private Button btnso;
+    private ImageButton btn1,btn2,btn3,btn4,btn5;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnCamera = (ImageButton) findViewById(R.id.btncamera);
-        btnso = (Button) findViewById(R.id.btnso);
+        btn1 = (ImageButton) findViewById(R.id.btnAni);
+        btn2 = (ImageButton) findViewById(R.id.btnLoca);
+        btn3 = (ImageButton) findViewById(R.id.btnFoto);
+        btn4 = (ImageButton) findViewById(R.id.btnAudi);
+        btn5 = (ImageButton) findViewById(R.id.btnVideo);
 
-        btnCamera.setOnClickListener(new View.OnClickListener() {
+        btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -31,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnso.setOnClickListener(new View.OnClickListener() {
+        btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
