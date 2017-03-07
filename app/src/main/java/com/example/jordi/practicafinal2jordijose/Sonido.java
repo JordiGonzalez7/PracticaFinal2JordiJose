@@ -25,7 +25,7 @@ public class Sonido extends AppCompatActivity {
     private String nombreFi = null, nombreFi2 = null;
     private MediaRecorder mr = null;
     private MediaPlayer mp = null;
-    private File fotodir,foto;
+    private File AudioDir, Audio;
 
     public static final int REQUEST_MICROPHONE = 1;
 
@@ -38,11 +38,10 @@ public class Sonido extends AppCompatActivity {
         btn2 = (Button) findViewById(R.id.btn2);
         btn3 = (Button) findViewById(R.id.btn3);
 
-        nombreFi = Environment.DIRECTORY_MUSIC+"audio.3gp";
-        nombreFi2 = getExternalFilesDir(null) + "audio2.3gp";
 
-        fotodir = new File(getExternalFilesDir(Environment.DIRECTORY_MUSIC), "PruebaAudio");
-        fotodir.mkdirs();
+
+        AudioDir = new File(getExternalFilesDir(Environment.DIRECTORY_MUSIC), "PruebaAudio");
+        AudioDir.mkdirs();
 
 
         btn2.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +102,7 @@ public class Sonido extends AppCompatActivity {
                     REQUEST_MICROPHONE);
 
         }
-        foto = new File(fotodir, "audio.3gp");
+        Audio = new File(AudioDir, "audio.3gp");
 
         mr = new MediaRecorder();
         mr.reset();
@@ -111,7 +110,7 @@ public class Sonido extends AppCompatActivity {
         mr.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         mr.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 
-        mr.setOutputFile(foto.getAbsolutePath());
+        mr.setOutputFile(Audio.getAbsolutePath());
 
         try {
             mr.prepare();
@@ -141,7 +140,7 @@ public class Sonido extends AppCompatActivity {
         mp = new MediaPlayer();
         mp.reset();
         try {
-            mp.setDataSource(foto.getAbsolutePath());
+            mp.setDataSource(Audio.getAbsolutePath());
             mp.prepare();
             mp.start();
         } catch (IOException e) {
