@@ -107,6 +107,7 @@ public class Sonido extends AppCompatActivity {
         mr.reset();
         mr.setAudioSource(MediaRecorder.AudioSource.MIC);
         mr.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+
         mr.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 
         mr.setOutputFile(Audio.getAbsolutePath());

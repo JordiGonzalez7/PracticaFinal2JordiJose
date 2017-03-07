@@ -44,6 +44,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), Video.class);
+                startActivity(i);
+            }
+        });
+
     }
 
 
