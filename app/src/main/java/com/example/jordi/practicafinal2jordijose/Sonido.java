@@ -1,16 +1,21 @@
 package com.example.jordi.practicafinal2jordijose;
 
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
-import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ToggleButton;
 
+import java.io.File;
 import java.io.IOException;
 
 public class Sonido extends AppCompatActivity {
@@ -20,6 +25,9 @@ public class Sonido extends AppCompatActivity {
     private String nombreFi = null, nombreFi2 = null;
     private MediaRecorder mr = null;
     private MediaPlayer mp = null;
+    private File fotodir,foto;
+
+    public static final int REQUEST_MICROPHONE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +38,11 @@ public class Sonido extends AppCompatActivity {
         btn2 = (Button) findViewById(R.id.btn2);
         btn3 = (Button) findViewById(R.id.btn3);
 
-        nombreFi = Environment.DIRECTORY_MUSIC + "/audio1.3gp";
-        nombreFi2 = getExternalFilesDir(null) + "/audio2.3gp";
+        nombreFi = Environment.DIRECTORY_MUSIC+"audio.3gp";
+        nombreFi2 = getExternalFilesDir(null) + "audio2.3gp";
+
+        fotodir = new File(getExternalFilesDir(Environment.DIRECTORY_MUSIC), "PruebaAudio");
+        fotodir.mkdirs();
 
 
         btn2.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +77,10 @@ public class Sonido extends AppCompatActivity {
     }
 
     public void OnclickGrabar(View v) {
+
+
         if (grabando) {
+
             nograbar(v);
         } else {
 
@@ -74,38 +88,60 @@ public class Sonido extends AppCompatActivity {
         }
         grabando = !grabando;
 
+
     }
 
 
     private void grabar(View v) {
+
+
+        if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions((Activity) getApplicationContext(),
+                    new String[]{Manifest.permission.RECORD_AUDIO},
+                    REQUEST_MICROPHONE);
+
+        }
+        foto = new File(fotodir, "audio.3gp");
+
         mr = new MediaRecorder();
         mr.reset();
         mr.setAudioSource(MediaRecorder.AudioSource.MIC);
         mr.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         mr.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-        mr.setOutputFile(nombreFi);
+
+        mr.setOutputFile(foto.getAbsolutePath());
 
         try {
             mr.prepare();
+            mr.start();
 
         } catch (IOException e) {
             e.printStackTrace();
 
         }
-        mr.start();
+
     }
 
     private void nograbar(View v) {
-        mr.stop();
-        mr.release();
-        mr = null;
+
+        try{
+            mr.stop();
+            mr.release();
+            mr = null;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
 
     }
 
     private void repro(View v) {
         mp = new MediaPlayer();
+        mp.reset();
         try {
-            mp.setDataSource(nombreFi);
+            mp.setDataSource(foto.getAbsolutePath());
             mp.prepare();
             mp.start();
         } catch (IOException e) {
@@ -115,8 +151,14 @@ public class Sonido extends AppCompatActivity {
     }
 
     private void norepro(View v) {
-        mp.release();
-        mp = null;
+        try {
+            mp.release();
+            mp = null;
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
 
     }
 }

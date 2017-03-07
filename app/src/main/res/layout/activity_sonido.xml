@@ -34,7 +34,8 @@
             android:textOn="Parar"
             android:layout_marginTop="28dp"
             android:id="@+id/btn1"
-            android:onClick="OnclickGrabar" />
+            android:onClick="OnclickGrabar"
+            android:checked="false" />
 
         <TextView
             android:text="Reproducir"
