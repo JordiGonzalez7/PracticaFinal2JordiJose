@@ -22,7 +22,6 @@ public class Sonido extends AppCompatActivity {
 
     private Button btn2, btn3;
     private boolean grabando = false, reproduciendo = false;
-    private String nombreFi = null, nombreFi2 = null;
     private MediaRecorder mr = null;
     private MediaPlayer mp = null;
     private File AudioDir, Audio;
