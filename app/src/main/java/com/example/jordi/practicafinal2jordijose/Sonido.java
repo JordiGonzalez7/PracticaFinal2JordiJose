@@ -42,7 +42,7 @@ public class Sonido extends AppCompatActivity {
         AudioDir = new File(getExternalFilesDir(Environment.DIRECTORY_MUSIC), "PruebaAudio");
         AudioDir.mkdirs();
 
-
+        //en funcion de si hay datos o no reproduce el sonido grabado mediante un metodo
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +76,7 @@ public class Sonido extends AppCompatActivity {
 
     public void OnclickGrabar(View v) {
 
-
+        //en funcion de si esta pulsado o no, pasa al metodo para grabar o para parar la grabacion
         if (grabando) {
 
             nograbar(v);
@@ -92,7 +92,7 @@ public class Sonido extends AppCompatActivity {
 
     private void grabar(View v) {
 
-
+        //en este metodo se ejecuta el mediarecorder para grabar el audio que recibe el microfono y la guarda en un fichero de audio
         if (ContextCompat.checkSelfPermission(getApplicationContext(),
                 Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
 
@@ -124,7 +124,8 @@ public class Sonido extends AppCompatActivity {
     }
 
     private void nograbar(View v) {
-
+            //una vez pulsado, el micro deja de escuchar y para la grabacion, guardando el fichero en el archivo
+            //anteriormente creado
         try{
             mr.stop();
             mr.release();
@@ -137,6 +138,9 @@ public class Sonido extends AppCompatActivity {
     }
 
     private void repro(View v) {
+
+        //crea un mediaPlayer para reproducir el fichero de audio previamente creado mediante su ruta
+
         mp = new MediaPlayer();
         mp.reset();
         try {
@@ -150,6 +154,8 @@ public class Sonido extends AppCompatActivity {
     }
 
     private void norepro(View v) {
+
+        //para la reproduccion en cuanto se pulsa el boton
         try {
             mp.release();
             mp = null;

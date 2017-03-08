@@ -12,7 +12,7 @@ import android.widget.ImageView;
 
 public class Animacion extends AppCompatActivity {
 
-
+    //creamos los botones y demas componentes
     private Button btn3A,btn1,btn2,btn3,btn4;
     private ImageView img1,img2f;
 
@@ -20,6 +20,8 @@ public class Animacion extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animacion);
+
+        //asignamos los componentes
 
         btn1 = (Button)findViewById(R.id.btn1);
         btn2 = (Button)findViewById(R.id.btn2);
@@ -30,6 +32,7 @@ public class Animacion extends AppCompatActivity {
         img1 = (ImageView)findViewById(R.id.img1);
 
         img2f = (ImageView)findViewById(R.id.img2);
+        //con esto establecemos la animacion  en el imageview para que empiece
         AnimationDrawable animacio = (AnimationDrawable) img2f.getDrawable();
         animacio.start();
 
@@ -37,7 +40,7 @@ public class Animacion extends AppCompatActivity {
 
 
 
-        //interpolacion
+        //interpolacion, en cada uno de los botones se inicia un tipo de anaimacion en el IV
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

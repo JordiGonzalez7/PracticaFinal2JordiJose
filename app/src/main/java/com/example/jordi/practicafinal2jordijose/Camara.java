@@ -18,6 +18,8 @@ import java.io.File;
 
 public class Camara extends AppCompatActivity {
 
+    //creamos lo componentes
+
     private Button btn1c, btn2c, btn3c;
     private ImageView img1c, img2c;
     public int tipo;
@@ -36,11 +38,15 @@ public class Camara extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camara);
 
+        //asignamos los componentes
+
         btn1c = (Button) findViewById(R.id.btn1);
         btn2c = (Button) findViewById(R.id.btn2);
         btn3c = (Button) findViewById(R.id.btn3);
         img1c = (ImageView) findViewById(R.id.img1);
         img2c = (ImageView) findViewById(R.id.img2);
+
+        //creamos el directorio donde guardar los fotos
 
         fotodir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "FotosPrueba");
         fotodir.mkdirs();
@@ -49,6 +55,8 @@ public class Camara extends AppCompatActivity {
         btn1c.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // en este boron creamos el intent que abrira la camara y guardara la foto realizada en la carpeta correcta
                 Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE_SECURE);
 
 
@@ -67,6 +75,9 @@ public class Camara extends AppCompatActivity {
         btn2c.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //en este boton se hace lo mismo que en el anterio pero con un result code diferente para mostrar la foto
+                //mediante startactivityforresult de otra manera al primer boton
 
                 Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE_SECURE);
 
@@ -101,7 +112,7 @@ public class Camara extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.e("requestCode", "requestCode:" + requestCode);
         Log.e("RESULT_OK", "RESULT_OK:" + RESULT_OK);
-
+//en funcion del result code que hayamos recibido tendremos un tamaño u otro de la foto
 
         if ((requestCode == normal || requestCode == reducida) && resultCode == RESULT_OK) {
 
@@ -126,7 +137,7 @@ public class Camara extends AppCompatActivity {
                     break;
                 case reducida:
                     try {
-
+                //con el bitmap establecemos una resolucion diferente a la original
                         bMap = BitmapFactory.decodeFile(
                                 getExternalFilesDir(Environment.DIRECTORY_PICTURES) +
                                         "/FotosPrueba/" + "foto2.jpg");

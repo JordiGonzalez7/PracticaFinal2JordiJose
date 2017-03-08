@@ -11,7 +11,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ImageButton btn1,btn2,btn3,btn4,btn5;
 
-
+//en esta activity tenemos todos los botones que van a cada una de la actividades, estos son imageButtons
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
