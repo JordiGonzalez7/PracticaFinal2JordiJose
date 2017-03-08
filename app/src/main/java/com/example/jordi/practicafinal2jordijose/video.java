@@ -36,15 +36,22 @@ public class Video extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                //con este intent se activa la camara para grabar un video
+
                 Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
                 startActivityForResult(intent, INTENT_GRABAR_VIDEO);
 
             }
         });
 
+
+
+
         btn2V.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //cuando el video esta cargado satisfactoriamente en el uri se le asigna al Video View para que este se reproduzca
                 Toast.makeText(getApplicationContext(),"Reproduciendo...",Toast.LENGTH_LONG).show();
                 visor.setVideoURI(uriVideo);
                 visor.start();
@@ -67,6 +74,9 @@ public class Video extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //una vez se ha grabado todo lo que el usuario quiera, el uri se encarga de alamacenar el video
+        //para previamente reproducirlo
+
         if (resultCode == RESULT_OK){
 
             if(requestCode == INTENT_GRABAR_VIDEO){
