@@ -10,60 +10,52 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.jordi.practicafinal2jordijose.Video">
 
-    <ScrollView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:weightSum="1"
+        android:id="@+id/ll1"
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <TextView
+            android:text="Grabar Video"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/textView"
+            android:textColor="@android:color/black"
+            android:textSize="24sp" />
 
-            <TextView
-                android:text="Grabar Video"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:id="@+id/textView"
-                android:textColor="@android:color/black"
-                android:textSize="24sp" />
+        <Button
+            android:text="Grabar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn1"
+            android:layout_marginTop="25dp" />
 
-            <Button
-                android:text="Grabar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/btn1"
-                android:layout_marginTop="25dp" />
+        <TextView
+            android:text="Reproducir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textColor="@android:color/black"
+            android:layout_below="@+id/btn1"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="36dp"
+            android:id="@+id/titulo2"
+            android:layout_marginBottom="25dp" />
 
-            <TextView
-                android:text="Reproducir"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="24sp"
-                android:textColor="@android:color/black"
-                android:layout_below="@+id/btn1"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="36dp"
-                android:id="@+id/titulo2"
-                android:layout_marginBottom="25dp" />
+        <Button
+            android:text="reproducir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn2"
+            android:textSize="14sp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
 
-            <Button
-                android:text="reproducir"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/btn2"
-                android:textSize="14sp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentStart="true" />
-
-            <VideoView
-                android:layout_width="match_parent"
-                android:layout_height="195dp"
-                android:id="@+id/vv1" />
-
-        </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"
@@ -72,4 +64,14 @@
         android:layout_alignParentStart="true"
         android:id="@+id/btn3"
         android:text="@string/atras" />
+
+    <VideoView
+        android:id="@+id/vv1"
+        android:layout_width="match_parent"
+        android:layout_weight="0.49"
+        android:layout_height="170dp"
+        android:layout_above="@+id/btn3"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="9dp" />
+
 </RelativeLayout>
