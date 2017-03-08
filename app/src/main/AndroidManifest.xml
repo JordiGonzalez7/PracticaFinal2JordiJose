@@ -6,7 +6,6 @@
         android:name="android.hardware.camera"
         android:required="true" />
 
-
     <uses-permission android:name="android.permission.RECORD_VIDEO" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -28,7 +27,8 @@
         </activity>
         <activity android:name=".Camara" />
         <activity android:name=".Sonido" />
-        <activity android:name=".Video"></activity>
+        <activity android:name=".Video" />
+        <activity android:name=".Animacion"></activity>
     </application>
 
 </manifest>

@@ -23,6 +23,22 @@ public class MainActivity extends AppCompatActivity {
         btn4 = (ImageButton) findViewById(R.id.btnAudi);
         btn5 = (ImageButton) findViewById(R.id.btnVideo);
 
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(getApplicationContext(), Animacion.class);
+                startActivity(i);
+            }
+        });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
