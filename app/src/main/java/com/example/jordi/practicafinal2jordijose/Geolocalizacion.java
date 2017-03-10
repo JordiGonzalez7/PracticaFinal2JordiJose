@@ -33,16 +33,38 @@ public class Geolocalizacion extends AppCompatActivity implements LocationListen
         btn4 = (Button) findViewById(R.id.btn4);
 
 
+        LocationManager LoMa = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+
+        location = LoMa.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        LoMa.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1500, 1, this);
+
+
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String txt = " Posicion actual:\n " + " Latitud = " + location.getLatitude() + "\n" + " Longitud = " + location.getLongitude();
-                Toast.makeText(getApplicationContext(), txt, Toast.LENGTH_LONG).show();
-
+                if (location == null) {
+                    Toast.makeText(getApplicationContext(), " Esperando a recibir las coordenadas", Toast.LENGTH_LONG).show();
+                } else {
+                    String txt = " Posicion actual:\n " + " Latitud = " + location.getLatitude() + "\n" + " Longitud = " + location.getLongitude();
+                    Toast.makeText(getApplicationContext(), txt, Toast.LENGTH_LONG).show();
+                }
 
             }
         });
+
 
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,20 +84,6 @@ public class Geolocalizacion extends AppCompatActivity implements LocationListen
             }
         });
 
-        LocationManager LoMa = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        LoMa.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1500, 1, this);
-
-
     }
 
     //Metodos del location listener
@@ -93,12 +101,15 @@ public class Geolocalizacion extends AppCompatActivity implements LocationListen
         switch (status) {
             case LocationProvider.OUT_OF_SERVICE:
                 mensage = ("GPS STATUS: Fuera de servicio");
+                Toast.makeText(getApplicationContext(), mensage, Toast.LENGTH_LONG).show();
                 break;
             case LocationProvider.TEMPORARILY_UNAVAILABLE:
                 mensage = ("GPS STATUS: Temporalmente desactivado");
+                Toast.makeText(getApplicationContext(), mensage, Toast.LENGTH_LONG).show();
                 break;
             case LocationProvider.AVAILABLE:
                 mensage = ("GPS STATUS: Disponible");
+                Toast.makeText(getApplicationContext(), mensage, Toast.LENGTH_LONG).show();
                 break;
 
 

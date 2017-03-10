@@ -2,6 +2,7 @@ package com.example.jordi.practicafinal2jordijose;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -22,6 +23,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+
     }
 
 
@@ -42,5 +46,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng ciudad = new LatLng(34.05, -118.25);
         mMap.addMarker(new MarkerOptions().position(ciudad).title("Los Angeles"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(ciudad));
+
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+
+                mMap.addMarker(new MarkerOptions().position(latLng).title("Marcador establecido en "+latLng));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+
+            }
+        });
+
+
+
     }
 }
