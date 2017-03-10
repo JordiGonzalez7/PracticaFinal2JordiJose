@@ -26,7 +26,7 @@ public class Video extends AppCompatActivity {
 
         btn1V = (Button) findViewById(R.id.btn1);
         btn2V = (Button) findViewById(R.id.btn2);
-        btn3V = (Button) findViewById(R.id.btn3);
+        btn3V = (Button) findViewById(R.id.botonAtras);
         visor = (VideoView)findViewById(R.id.vv1);
 
         btn2V.setEnabled(false);

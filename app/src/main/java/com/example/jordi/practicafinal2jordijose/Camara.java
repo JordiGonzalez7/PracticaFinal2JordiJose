@@ -42,7 +42,7 @@ public class Camara extends AppCompatActivity {
 
         btn1c = (Button) findViewById(R.id.btn1);
         btn2c = (Button) findViewById(R.id.btn2);
-        btn3c = (Button) findViewById(R.id.btn3);
+        btn3c = (Button) findViewById(R.id.botonAtras);
         img1c = (ImageView) findViewById(R.id.img1);
         img2c = (ImageView) findViewById(R.id.img2);
 

@@ -25,7 +25,7 @@ public class Animacion extends AppCompatActivity {
 
         btn1 = (Button)findViewById(R.id.btn1);
         btn2 = (Button)findViewById(R.id.btn2);
-        btn3 = (Button)findViewById(R.id.btn3);
+        btn3 = (Button)findViewById(R.id.botonAtras);
         btn4 = (Button)findViewById(R.id.btn4);
         btn3A = (Button)findViewById(R.id.btn33);
 

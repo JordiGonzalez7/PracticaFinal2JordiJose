@@ -35,7 +35,7 @@ public class Sonido extends AppCompatActivity {
 
 
         btn2 = (Button) findViewById(R.id.btn2);
-        btn3 = (Button) findViewById(R.id.btn3);
+        btn3 = (Button) findViewById(R.id.botonAtras);
 
 
 

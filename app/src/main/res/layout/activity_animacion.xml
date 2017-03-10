@@ -91,7 +91,7 @@
                         android:text="rodar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/btn3" />
+                        android:id="@+id/botonAtras" />
 
                     <Button
                         android:text="botar"
