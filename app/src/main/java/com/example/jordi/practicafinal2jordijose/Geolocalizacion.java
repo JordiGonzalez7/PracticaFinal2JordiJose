@@ -33,6 +33,8 @@ public class Geolocalizacion extends AppCompatActivity implements LocationListen
         btn4 = (Button) findViewById(R.id.btn4);
 
 
+        //creamos el location manager junto con los permisos y con otro location para establecer la ultima localizacion reconocida
+
         LocationManager LoMa = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -86,7 +88,7 @@ public class Geolocalizacion extends AppCompatActivity implements LocationListen
 
     }
 
-    //Metodos del location listener
+    //Metodos del location listener para cada una de las posibilidades
 
 
     @Override
